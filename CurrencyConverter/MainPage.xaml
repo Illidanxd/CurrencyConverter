@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CurrencyConverter"
+             x:Class="CurrencyConverter.MainPage"
+             BackgroundColor="White">
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Конвертер валют" FontSize="28" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" />
+
+            <!-- Дата -->
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Label Text="Дата" VerticalOptions="Center" TextColor="Black"/>
+                <DatePicker Date="{Binding SelectedDate}" TextColor="Black" />
+            </HorizontalStackLayout>
+
+            <!-- Подсказка о дате курса -->
+            <Label Text="{Binding RateDateLabel}" FontAttributes="Italic" TextColor="Gray" HorizontalOptions="End" />
+
+            <!-- Верхняя валюта -->
+            <Grid ColumnDefinitions="*, 100" ColumnSpacing="10">
+                <Border Grid.Column="0" Stroke="Black" StrokeThickness="1" Padding="5">
+                    <Picker ItemsSource="{Binding Currencies}" 
+                            ItemDisplayBinding="{Binding DisplayName}"
+                            SelectedItem="{Binding CurrencyFrom}"
+                            TextColor="Black" />
+                </Border>
+                <Border Grid.Column="1" Stroke="Black" StrokeThickness="1" Padding="5">
+                    <Entry Text="{Binding AmountFrom, Mode=TwoWay}" 
+                           Keyboard="Numeric"
+                           TextColor="Black" 
+                           HorizontalTextAlignment="End" />
+                </Border>
+            </Grid>
+
+            <!-- Нижняя валюта -->
+            <Grid ColumnDefinitions="*, 100" ColumnSpacing="10">
+                <Border Grid.Column="0" Stroke="Black" StrokeThickness="1" Padding="5">
+                    <Picker ItemsSource="{Binding Currencies}" 
+                            ItemDisplayBinding="{Binding DisplayName}"
+                            SelectedItem="{Binding CurrencyTo}"
+                            TextColor="Black" />
+                </Border>
+                <Border Grid.Column="1" Stroke="Black" StrokeThickness="1" Padding="5">
+                    <Entry Text="{Binding AmountTo, Mode=TwoWay}" 
+                           Keyboard="Numeric"
+                           TextColor="Black" 
+                           HorizontalTextAlignment="End" />
+                </Border>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
